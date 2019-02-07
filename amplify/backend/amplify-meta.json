@@ -1,0 +1,54 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "ebootpp-20190203223323-authRole",
+			"UnauthRoleArn": "arn:aws:iam::883602838056:role/ebootpp-20190203223323-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::883602838056:role/ebootpp-20190203223323-authRole",
+			"Region": "us-east-2",
+			"DeploymentBucketName": "ebootpp-20190203223323-deployment",
+			"UnauthRoleName": "ebootpp-20190203223323-unauthRole",
+			"StackName": "ebootpp-20190203223323",
+			"StackId": "arn:aws:cloudformation:us-east-2:883602838056:stack/ebootpp-20190203223323/0b933fa0-27c9-11e9-944a-02edfbb31034"
+		}
+	},
+	"function": {
+		"nebobotapp8796834d": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": [],
+			"lastBuildTimeStamp": "2019-02-03T15:38:25.883Z",
+			"lastPackageTimeStamp": "2019-02-03T15:38:25.958Z",
+			"distZipFilename": "nebobotapp8796834d-1549208305-latest-build.zip",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/ebootpp-20190203223323-deployment/amplify-cfn-templates/function/nebobotapp8796834d-cloudformation-template.json",
+				"logicalId": "functionnebobotapp8796834d"
+			},
+			"lastPushTimeStamp": "2019-02-03T15:39:36.772Z",
+			"output": {
+				"Region": "us-east-2",
+				"Arn": "arn:aws:lambda:us-east-2:883602838056:function:nebobotapp8796834d",
+				"Name": "nebobotapp8796834d"
+			},
+			"lastPushDirHash": "dAYo+k7i1WpFQFIqGt1S1URki38="
+		}
+	},
+	"hosting": {
+		"S3AndCloudFront": {
+			"service": "S3AndCloudFront",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/ebootpp-20190203223323-deployment/amplify-cfn-templates/hosting/template.json",
+				"logicalId": "hostingS3AndCloudFront"
+			},
+			"lastPushTimeStamp": "2019-02-03T15:39:36.772Z",
+			"output": {
+				"S3BucketSecureURL": "https://ebootpp-20190203223801-hostingbucket.s3.amazonaws.com",
+				"WebsiteURL": "http://ebootpp-20190203223801-hostingbucket.s3-website.us-east-2.amazonaws.com",
+				"Region": "us-east-2",
+				"HostingBucketName": "ebootpp-20190203223801-hostingbucket"
+			},
+			"lastPushDirHash": "bP3OPefY9NFaKhTRSWZliVNx3FY="
+		}
+	}
+}

@@ -1,0 +1,83 @@
+package bot.nebo.myapplication;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.crashlytics.android.Crashlytics;
+
+import org.litepal.LitePal;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import bot.nebo.myapplication.models.UserAccount;
+import io.fabric.sdk.android.Fabric;
+
+public class ListAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    String login;
+    Button deleteSelectedAccount;
+    Spinner dropdown;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list_account);
+        Fabric.with(this, new Crashlytics());
+
+        deleteSelectedAccount = findViewById(R.id.btnDeleteAccount);
+        dropdown = findViewById(R.id.dropdownAccounts);
+        loadAccountToSpinner();
+    }
+
+    private void loadAccountToSpinner(){
+        List<UserAccount> allAccounts = LitePal.findAll(UserAccount.class);
+        List<String> accounts = new ArrayList<>();
+        for (UserAccount account: allAccounts){
+            accounts.add(account.getNikName());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, accounts.toArray(new String[0]));
+        dropdown.setAdapter(adapter);
+        dropdown.setOnItemSelectedListener(this);
+    }
+
+    public void inputSelectAccount (View v){
+        Log.i("sd", login.toString());
+        if (login == null){
+            Toast.makeText(ListAccountActivity.this, "Вы не выбрали аккаунт", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(ListAccountActivity.this, AddAccountActivity.class);
+        intent.putExtra("LOGIN", login);
+        startActivity(intent);
+    }
+
+    public void deleteSelectedAccount(View v){
+        if (login == null){
+            Toast.makeText(ListAccountActivity.this, "Вы не выбрали аккаунт", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        UserAccount account = LitePal.where("nikName = ?", login).find(UserAccount.class).get(0);
+        account.delete();
+        Toast.makeText(this, "Аккаунт с логином \""+login+"\" удален с списка", Toast.LENGTH_SHORT).show();
+        loadAccountToSpinner();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        login = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        login = "";
+    }
+}
