@@ -130,6 +130,9 @@ public class ManagerWorkActivity extends AppCompatActivity {
                     btnManagerStart.setEnabled(true);
                     btnManagerStart.setText("Начать");
                     addLog("Менеджер закончил работу");
+                    cP = false;
+                    dP = false;
+                    bP = false;
                 }
             }
         });

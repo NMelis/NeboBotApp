@@ -84,6 +84,8 @@ public class LifterActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Лифтер закончил работу", Toast.LENGTH_SHORT).show();
                     btnStartLiter.setEnabled(true);
                     btnStartLiter.setText("Начать");
+                    isFinishWork = false;
+                    countUp = 0;
                 }
             }
         });
