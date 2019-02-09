@@ -126,7 +126,14 @@ public class AddAccountActivity extends AppCompatActivity {
                     AddAccountActivity.botClient = null;
                 }
             }
-            else if (site.equals("pumpit.ru")) AddAccountActivity.botClient = new PumpitRu(login, password).login();
+            else if (site.equals("pumpit.ru")) {
+                try {
+                    AddAccountActivity.botClient = new PumpitRu(login, password).login();
+                } catch (IOException e) {
+                    Crashlytics.logException(e);
+                    AddAccountActivity.botClient = null;
+                }
+            }
             this.isLogin = AddAccountActivity.botClient != null;
 
             return isLogin;

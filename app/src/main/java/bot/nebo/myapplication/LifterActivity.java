@@ -16,30 +16,44 @@ import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
 
 import io.fabric.sdk.android.Fabric;
+import ru.nebolife.bot.core.core.RequestCore;
+import ru.nebolife.bot.core.core.works.Lift;
+import ru.nebolife.bot.core.listeners.GetOntInfoListener;
+import ru.nebolife.bot.core.listeners.LiftGetAllDollarsListener;
 import ru.nebolife.bot.core.listeners.LiftListener;
 
 public class LifterActivity extends AppCompatActivity {
     private LinearLayout liftLogLayout;
     private ScrollView scrollView;
     private boolean isFinishWork = false;
-    private Button btnStartLiter;
     private int countUp = 0;
+    private Button btnStartLiter;
+    private Button btnCallVisitors;
+    private Button btnPayAllDollars;
+    private Button btnRunLiftOnGold;
+    private Button btnCallAndRunLift;
+    Lift lift;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lifter);
         Fabric.with(this, new Crashlytics());
+        btnPayAllDollars = findViewById(R.id.btnPayAllGold);
+        btnCallVisitors = findViewById(R.id.btnCallVisitors);
+        btnRunLiftOnGold = findViewById(R.id.btnRunLiftOnGold);
+        btnCallAndRunLift = findViewById(R.id.btnCallAndRunLift);
         liftLogLayout = findViewById(R.id.liftLogLayout);
         scrollView = findViewById(R.id.liftScrollViewLogs);
         btnStartLiter = findViewById(R.id.btnStartLiter);
+        lift = AddAccountActivity.botClient.Lift();
+
     }
 
     public void startLifter(View view) {
         if (AddAccountActivity.botClient == null) {back(); return;}
         Answers.getInstance().logCustom(new CustomEvent("Start lifter"));
-        btnStartLiter.setEnabled(false);
-        btnStartLiter.setText("Стоять смирно....");
+        runWork(false);
         isFinishWork = true;
         new Thread(new Runnable() {
             @Override
@@ -85,6 +99,7 @@ public class LifterActivity extends AppCompatActivity {
                     btnStartLiter.setEnabled(true);
                     btnStartLiter.setText("Начать");
                     isFinishWork = false;
+                    runWork(true);
                     countUp = 0;
                 }
             }
@@ -97,6 +112,14 @@ public class LifterActivity extends AppCompatActivity {
     }
 
 
+    private void runWork(boolean is){
+        btnStartLiter.setEnabled(is);
+        btnCallVisitors.setEnabled(is);
+        btnPayAllDollars.setEnabled(is);
+        btnRunLiftOnGold.setEnabled(is);
+        btnCallAndRunLift.setEnabled(is);
+    }
+
     @Override
     public void onBackPressed() {
         if (!isFinishWork)
@@ -104,5 +127,71 @@ public class LifterActivity extends AppCompatActivity {
         else
             Toast.makeText(this, "Нельзя выйти пока выполняеться задача", Toast.LENGTH_SHORT).show();
 
+    }
+
+    public void onBtnCallAndRunLift(View view) {
+        runWork(false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                lift.activateLift(new GetOntInfoListener(){
+                    @Override
+                    public void response(String s) {
+                        addLog(s);
+                        lift.processLiftAll(new GetOntInfoListener(){
+                            @Override
+                            public void response(String s) {
+                                addLog(s);
+                            }
+                        });
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void onBtnRunLiftOnGold(View view) {
+        runWork(false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                lift.processLiftAll(new GetOntInfoListener(){
+                    @Override
+                    public void response(String s) {
+                        addLog(s);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void onBtnCallVisitors(View view) {
+        runWork(false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                lift.activateLift(new GetOntInfoListener(){
+                    @Override
+                    public void response(String s) {
+                        addLog(s);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void onBtnPayAllGold(View view) {
+        runWork(false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                lift.payAllDollars(new LiftGetAllDollarsListener() {
+                    @Override
+                    public void response(String s) {
+                        addLog(s);
+                    }
+                });
+            }
+        }).start();
     }
 }

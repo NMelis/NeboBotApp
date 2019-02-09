@@ -7,6 +7,7 @@ import com.crashlytics.android.answers.CustomEvent;
 import org.litepal.LitePal;
 
 import bot.nebo.myapplication.AddAccountActivity;
+import bot.nebo.myapplication.MainActivity;
 import bot.nebo.myapplication.models.User;
 
 public class Helper {
@@ -24,18 +25,24 @@ public class Helper {
     }
 
     public static void log(String eventName){
+        String userName = getUserName();
+        if (userName.equals("Keanu") || userName.equals("Melis") || MainActivity.isDev) return;
         Answers.getInstance().logCustom(new CustomEvent(eventName)
-                .putCustomAttribute("UserName", getUserName()));
+                .putCustomAttribute("UserName", userName));
     }
     public static void logWithParametr(String eventName, String key, String value){
+        String userName = getUserName();
+        if (userName.equals("Keanu") || userName.equals("Melis") || MainActivity.isDev) return;
         Answers.getInstance().logCustom(new CustomEvent(eventName)
-                .putCustomAttribute("UserName", getUserName())
+                .putCustomAttribute("UserName", userName)
                 .putCustomAttribute(key, value));
     }
 
     public static void logWithParametrs(String eventName, String key, String value, String key2, String value2){
+        String userName = getUserName();
+        if (userName.equals("Keanu") || userName.equals("Melis") || MainActivity.isDev) return;
         Answers.getInstance().logCustom(new CustomEvent(eventName)
-                .putCustomAttribute("UserName", getUserName())
+                .putCustomAttribute("UserName", userName)
                 .putCustomAttribute(key, value)
                 .putCustomAttribute(key2, value2));
     }
