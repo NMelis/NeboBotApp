@@ -26,7 +26,7 @@ import ru.nebolife.bot.core.core.RequestCore;
 import ru.nebolife.bot.core.listeners.NewVersionAppInterface;
 
 public class MainActivity extends Activity {
-    public static final float VERSION_APP = (float) 0.6;
+    public static final float VERSION_APP = (float) 0.7;
     public static final boolean isDev = true;
     static User user;
     Button btnLoadAccounts;
