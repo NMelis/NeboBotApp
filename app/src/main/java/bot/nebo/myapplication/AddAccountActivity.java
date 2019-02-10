@@ -29,6 +29,7 @@ import io.fabric.sdk.android.Fabric;
 import ru.nebolife.bot.core.core.RequestCore;
 import ru.nebolife.bot.core.core.sites.NeboMobi;
 import ru.nebolife.bot.core.core.sites.PumpitRu;
+import ru.nebolife.bot.core.helpers.StopBotException;
 import ru.nebolife.bot.core.listeners.CheckInstance;
 
 public class AddAccountActivity extends AppCompatActivity {
@@ -124,6 +125,8 @@ public class AddAccountActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     Crashlytics.logException(e);
                     AddAccountActivity.botClient = null;
+                } catch (StopBotException e) {
+                    e.printStackTrace();
                 }
             }
             else if (site.equals("pumpit.ru")) {
@@ -132,6 +135,8 @@ public class AddAccountActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     Crashlytics.logException(e);
                     AddAccountActivity.botClient = null;
+                } catch (StopBotException e) {
+                    e.printStackTrace();
                 }
             }
             this.isLogin = AddAccountActivity.botClient != null;
@@ -142,22 +147,26 @@ public class AddAccountActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             if (this.isLogin) {
-                new RequestCore("").isUserBaned(login, new CheckInstance() {
-                    @Override
-                    public void onResponse(boolean b) {
-                        if (b){
-                            AuthActivity.user.setBaned(true);
-                            AuthActivity.user.save();
-                            Intent intent = new Intent(getBaseContext(), BanedActivity.class);
-                            startActivity(intent);
-                        }else {
-                            userAccount.setVerify(true);
-                            userAccount.save();
-                            Intent intent = new Intent(getBaseContext(), MenuActivity.class);
-                            startActivity(intent);
+                try {
+                    new RequestCore("").isUserBaned(login, new CheckInstance() {
+                        @Override
+                        public void onResponse(boolean b) {
+                            if (b){
+                                AuthActivity.user.setBaned(true);
+                                AuthActivity.user.save();
+                                Intent intent = new Intent(getBaseContext(), BanedActivity.class);
+                                startActivity(intent);
+                            }else {
+                                userAccount.setVerify(true);
+                                userAccount.save();
+                                Intent intent = new Intent(getBaseContext(), MenuActivity.class);
+                                startActivity(intent);
+                            }
                         }
-                    }
-                });
+                    });
+                } catch (StopBotException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("Successful authorization");
                 Helper.logWithParametrs("Login", "success", userAccount.getNikName(), "site", userAccount.getSite());
             }else {

@@ -26,6 +26,7 @@ import bot.nebo.myapplication.models.User;
 import br.tiagohm.markdownview.MarkdownView;
 import io.fabric.sdk.android.Fabric;
 import ru.nebolife.bot.core.core.RequestCore;
+import ru.nebolife.bot.core.helpers.StopBotException;
 import ru.nebolife.bot.core.listeners.NewVersionAppInterface;
 
 public class NewVersionAppActivity extends AppCompatActivity {
@@ -54,32 +55,35 @@ public class NewVersionAppActivity extends AppCompatActivity {
         buttonMega = findViewById(R.id.btnMega);
         Helper.log("Open page New version app");
         markdownView.loadMarkdownFromUrl("https://s3.eu-west-3.amazonaws.com/nebo-bot/textNew.md");
-        new RequestCore("").getLastNewVersion(MainActivity.VERSION_APP, new NewVersionAppInterface() {
-            @Override
-            public void onResponse(final HashMap<String, Object> hashMap) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        required = (boolean) hashMap.get("required");
-                        if (!required) {
-                            Toast.makeText(getApplicationContext(), "Это обновление необезательное, можете не устанавливать его сейчас", Toast.LENGTH_LONG).show();
-                            Toast.makeText(getApplicationContext(), "Нажмите назад (стрелочку) чтобы продолжить использование приложение без обновление", Toast.LENGTH_LONG).show();
-                        }
-                        JSONObject links = (JSONObject) hashMap.get("links");
-                        setTitle((String) hashMap.get("desc"));
-                        try {
-                            tgLink = links.getString("tg");
-                            megaLink = links.getString("mega");
-                            gDriveLink = links.getString("gD");
-                            yaLink = links.getString("ya");
-                        } catch (JSONException e) {
-                            Crashlytics.logException(e);
-                        }
+        try {
+            new RequestCore("").getLastNewVersion(MainActivity.VERSION_APP, new NewVersionAppInterface() {
+                @Override
+                public void onResponse(final HashMap<String, Object> hashMap) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            required = (boolean) hashMap.get("required");
+                            if (!required) {
+                                Toast.makeText(getApplicationContext(), "Это обновление необезательное, можете не устанавливать его сейчас", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Нажмите назад (стрелочку) чтобы продолжить использование приложение без обновление", Toast.LENGTH_LONG).show();
+                            }
+                            JSONObject links = (JSONObject) hashMap.get("links");
+                            setTitle((String) hashMap.get("desc"));
+                            try {
+                                tgLink = links.getString("tg");
+                                megaLink = links.getString("mega");
+                                gDriveLink = links.getString("gD");
+                                yaLink = links.getString("ya");
+                            } catch (JSONException e) {
+                                Crashlytics.logException(e);
+                            }
 
-                    }
-                });
-            }
-        });
+                        }
+                    });
+                }
+            });
+        } catch (StopBotException e) {
+        }
     }
 
     @Override

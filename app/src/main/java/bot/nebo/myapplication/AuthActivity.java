@@ -31,6 +31,7 @@ import java.util.HashMap;
 import bot.nebo.myapplication.models.User;
 import io.fabric.sdk.android.Fabric;
 import ru.nebolife.bot.core.core.RequestCore;
+import ru.nebolife.bot.core.helpers.StopBotException;
 import ru.nebolife.bot.core.listeners.CheckInstance;
 import ru.nebolife.bot.core.listeners.NewVersionAppInterface;
 
@@ -112,31 +113,39 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void start(String value){
-        new RequestCore("").isUserVkBaned(value, new CheckInstance() {
-            @Override
-            public void onResponse(boolean b) {
-                if (b){
-                    baned();
-                }else {
-                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
-    }
-    private void checkNewVersionApp(){
-        new RequestCore("").getLastNewVersion(MainActivity.VERSION_APP, new NewVersionAppInterface() {
-            @Override
-            public void onResponse(HashMap<String, Object> hashMap) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = new Intent(getBaseContext(), NewVersionAppActivity.class);
+        try {
+            new RequestCore("").isUserVkBaned(value, new CheckInstance() {
+                @Override
+                public void onResponse(boolean b) {
+                    if (b){
+                        baned();
+                    }else {
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
                         startActivity(intent);
                     }
-                });
-            }
-        });
+                }
+            });
+        } catch (StopBotException e) {
+            e.printStackTrace();
+        }
+    }
+    private void checkNewVersionApp(){
+        try {
+            new RequestCore("").getLastNewVersion(MainActivity.VERSION_APP, new NewVersionAppInterface() {
+                @Override
+                public void onResponse(HashMap<String, Object> hashMap) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(getBaseContext(), NewVersionAppActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            });
+        } catch (StopBotException e) {
+            e.printStackTrace();
+        }
     }
 
     private void baned(){

@@ -23,6 +23,7 @@ import bot.nebo.myapplication.models.User;
 import bot.nebo.myapplication.models.UserAccount;
 import io.fabric.sdk.android.Fabric;
 import ru.nebolife.bot.core.core.RequestCore;
+import ru.nebolife.bot.core.helpers.StopBotException;
 import ru.nebolife.bot.core.listeners.NewVersionAppInterface;
 
 public class MainActivity extends Activity {
@@ -79,18 +80,22 @@ public class MainActivity extends Activity {
 
     }
     private void checkNewVersionApp(){
-        new RequestCore("").getLastNewVersion(VERSION_APP, new NewVersionAppInterface() {
-            @Override
-            public void onResponse(HashMap<String, Object> hashMap) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = new Intent(getBaseContext(), NewVersionAppActivity.class);
-                        startActivity(intent);
-                    }
-                });
-            }
-        });
+        try {
+            new RequestCore("").getLastNewVersion(VERSION_APP, new NewVersionAppInterface() {
+                @Override
+                public void onResponse(HashMap<String, Object> hashMap) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(getBaseContext(), NewVersionAppActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            });
+        } catch (StopBotException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onCannelTG(View view) {

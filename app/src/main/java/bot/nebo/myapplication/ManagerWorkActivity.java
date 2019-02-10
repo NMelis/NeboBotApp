@@ -18,6 +18,7 @@ import com.crashlytics.android.answers.CustomEvent;
 
 import bot.nebo.myapplication.helper.Helper;
 import io.fabric.sdk.android.Fabric;
+import ru.nebolife.bot.core.helpers.StopBotException;
 import ru.nebolife.bot.core.listeners.CollectRevenueListener;
 import ru.nebolife.bot.core.listeners.DeliveryListener;
 import ru.nebolife.bot.core.listeners.RevenueBuildListener;
@@ -34,6 +35,7 @@ public class ManagerWorkActivity extends AppCompatActivity {
     private boolean cP = false;
     private boolean dP = false;
     private boolean bP = false;
+    private boolean stopBot = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +49,11 @@ public class ManagerWorkActivity extends AppCompatActivity {
         btnManagerStart = findViewById(R.id.btnStartManager);
         logLayout = findViewById(R.id.logLayout);
         scrollViewLog = findViewById(R.id.scrollViewLogs);
+        AddAccountActivity.botClient.unStop();
     }
 
     public void startManager(View view){
+        AddAccountActivity.botClient.unStop();
         btnManagerStart.setEnabled(false);
         isRunManager = true;
         btnManagerStart.setText("Ждемс....");
@@ -73,40 +77,45 @@ public class ManagerWorkActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                AddAccountActivity.botClient.runManager(new RevenueBuildListener() {
-                    @Override
-                    public void onFinish() {
-                        cP = true;
-                        addLog("Сборка выручки закончена");
-                    }
+                try {
+                    AddAccountActivity.botClient.runManager(new RevenueBuildListener() {
+                        @Override
+                        public void onFinish() {
+                            cP = true;
+                            addLog("Сборка выручки закончена");
+                        }
 
-                    @Override
-                    public void onRevenue(String floor) {
-                        addLog(floor);
-                    }
-                }, new DeliveryListener() {
-                    @Override
-                    public void onDelivery(String floor) {
-                        addLog(floor);
-                    }
+                        @Override
+                        public void onRevenue(String floor) {
+                            addLog(floor);
+                        }
+                    }, new DeliveryListener() {
+                        @Override
+                        public void onDelivery(String floor) {
+                            addLog(floor);
+                        }
 
-                    @Override
-                    public void onFinish() {
-                        dP = true;
-                        addLog("Доставка товаров закончена");
-                    }
-                }, new CollectRevenueListener() {
-                    @Override
-                    public void onBuy(String floor, String price) {
-                        addLog(floor + "  " + price);
-                    }
+                        @Override
+                        public void onFinish() {
+                            dP = true;
+                            addLog("Доставка товаров закончена");
+                        }
+                    }, new CollectRevenueListener() {
+                        @Override
+                        public void onBuy(String floor, String price) {
+                            addLog(floor + "  " + price);
+                        }
 
-                    @Override
-                    public void onFinish() {
-                        bP = true;
-                        addLog("Закупка товаров закончена");
-                    }
-                }, c, checkBoxLoad.isChecked(), checkBoxDelivery.isChecked(), checkBoxBuy.isChecked());
+                        @Override
+                        public void onFinish() {
+                            bP = true;
+                            addLog("Закупка товаров закончена");
+                        }
+                    }, c, checkBoxLoad.isChecked(), checkBoxDelivery.isChecked(), checkBoxBuy.isChecked());
+                } catch (StopBotException e) {
+                    cP = dP = bP = isRunManager = true;
+                    addLog("Бот был приостановлен");
+                }
             }
         }).start();
 
@@ -121,11 +130,8 @@ public class ManagerWorkActivity extends AppCompatActivity {
                 TextView textView = new TextView(getBaseContext());
                 textView.setText(text);
                 textView.setTextColor(Color.BLUE);
-                textView.setPadding(0,0,0,5);
-                logLayout.addView(textView);
-                scrollViewLog.fullScroll(View.FOCUS_DOWN);
+                logLayout.addView(textView, 0);
                 if (cP && dP && bP && isRunManager) {
-                    Toast.makeText(getBaseContext(), "Менеджер закончил работу", Toast.LENGTH_SHORT).show();
                     isRunManager = false;
                     btnManagerStart.setEnabled(true);
                     btnManagerStart.setText("Начать");
@@ -140,9 +146,20 @@ public class ManagerWorkActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!isRunManager) super.onBackPressed();
+        if (!isRunManager)
+            super.onBackPressed();
         else {
-            Toast.makeText(this, "Нельзя выйти пока выполняеться задача", Toast.LENGTH_SHORT).show();
+            if (stopBot) {
+                AddAccountActivity.botClient.stop();
+                cP = dP = bP = isRunManager = false;
+                addLog("");
+                Toast.makeText(this, "Бот был остановлен", Toast.LENGTH_LONG).show();
+                stopBot = false;
+                return;
+            }
+            Toast.makeText(this, "Нажмите еще раз чтобы остановить бота", Toast.LENGTH_LONG).show();
+            stopBot = true;
         }
+
     }
 }
