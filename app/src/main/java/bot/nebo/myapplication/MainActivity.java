@@ -28,7 +28,7 @@ import ru.nebolife.bot.core.listeners.NewVersionAppInterface;
 
 public class MainActivity extends Activity {
     // TODO To need change version & isDev every build apk
-    public static final float VERSION_APP = (float) 0.7;
+    public static final float VERSION_APP = (float) 0.8;
     public static final boolean isDev = false;
     static User user;
     Button btnLoadAccounts;

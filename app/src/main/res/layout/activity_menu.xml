@@ -96,7 +96,6 @@
         android:layout_marginBottom="8dp"
         android:text="Последняя новость:"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/viewNew"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"

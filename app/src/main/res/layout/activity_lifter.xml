@@ -9,7 +9,7 @@
     <ScrollView
         android:id="@+id/liftScrollViewLogs"
         android:layout_width="0dp"
-        android:layout_height="220dp"
+        android:layout_height="175dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -24,7 +24,7 @@
             android:id="@+id/liftLogLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
         </LinearLayout>
     </ScrollView>
@@ -74,6 +74,14 @@
             android:layout_height="38dp"
             android:onClick="onBtnRunLiftOnGold"
             android:text="Развезти всех за $1 (Быстро)"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btnLifter15"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:onClick="onBtnLifterOn15"
+            android:text="Лифтер за 15$"
             android:textAllCaps="false" />
 
         <Button

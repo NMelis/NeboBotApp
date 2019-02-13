@@ -24,6 +24,7 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menu);
         if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
         Fabric.with(this, new Crashlytics());
         markdownviewNew = (MarkdownView) findViewById(R.id.markdownviewNew);
@@ -83,7 +84,7 @@ public class MenuActivity extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(Object[] values) {
-            markdownviewNew.loadMarkdownFromUrl(VKApplication.urlStorageMds + "lastNew.md");
+            markdownviewNew.loadMarkdownFromUrl(values[0].toString());
         }
 
         @Override

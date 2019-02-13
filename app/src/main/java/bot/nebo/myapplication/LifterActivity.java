@@ -33,6 +33,7 @@ public class LifterActivity extends AppCompatActivity {
     private Button btnPayAllDollars;
     private Button btnRunLiftOnGold;
     private Button btnCallAndRunLift;
+    private Button btnLifter15;
     Lift lift;
     private boolean stopBot = false;
 
@@ -48,6 +49,7 @@ public class LifterActivity extends AppCompatActivity {
         liftLogLayout = findViewById(R.id.liftLogLayout);
         scrollView = findViewById(R.id.liftScrollViewLogs);
         btnStartLiter = findViewById(R.id.btnStartLiter);
+        btnLifter15 = findViewById(R.id.btnLifter15);
         lift = AddAccountActivity.botClient.Lift();
         if (AddAccountActivity.botClient == null) back();
         AddAccountActivity.botClient.unStop();
@@ -125,6 +127,8 @@ public class LifterActivity extends AppCompatActivity {
         btnPayAllDollars.setEnabled(is);
         btnRunLiftOnGold.setEnabled(is);
         btnCallAndRunLift.setEnabled(is);
+        btnCallAndRunLift.setEnabled(is);
+        btnLifter15.setEnabled(is);
     }
 
     @Override
@@ -227,7 +231,28 @@ public class LifterActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    lift.payAllDollars(new LiftGetAllDollarsListener() {
+                    lift.payAllDollars(new GetOntInfoListener() {
+                        @Override
+                        public void response(String s) {
+                            addLog(s);
+                        }
+                    });
+                } catch (StopBotException e) {
+                    isFinishWork = false;
+                    addLog("Бот был приостановлен");
+                }
+            }
+        }).start();
+    }
+
+    public void onBtnLifterOn15(View view) {
+        runWork(false);
+        AddAccountActivity.botClient.unStop();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    lift.lifter15(new GetOntInfoListener() {
                         @Override
                         public void response(String s) {
                             addLog(s);

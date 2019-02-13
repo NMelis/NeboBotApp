@@ -14,6 +14,7 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
+ext.enableCrashlytics = true
 
 
 android {
@@ -23,7 +24,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
-        versionName "0.8.1-FUNCTION_CANCELED"
+        versionName "0.8-LIFTER-15-AND-FUNCTION_CANCELED"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
