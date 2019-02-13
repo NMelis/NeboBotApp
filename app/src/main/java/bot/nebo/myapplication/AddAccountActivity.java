@@ -50,7 +50,7 @@ public class AddAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_account);
-        Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
         setTitle("Вход");
         user = LitePal.findFirst(User.class);
         dropdown = findViewById(R.id.listSite);

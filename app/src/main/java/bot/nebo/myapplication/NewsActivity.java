@@ -30,7 +30,7 @@ public class NewsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
-        Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
         scrollViewNews = findViewById(R.id.scrollViewNews);
         linearLayout = findViewById(R.id.newsLayout);
         progressBarLoadNews = findViewById(R.id.progressBarLoadNews);

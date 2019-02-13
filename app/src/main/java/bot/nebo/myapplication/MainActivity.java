@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
         btnLoadAccounts = findViewById(R.id.btnLoadAccount);
         TextView textViewVersionApp = findViewById(R.id.textViewVersionApp);
         textViewVersionApp.setText("Версия приложение: "+ VERSION_APP);

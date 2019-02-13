@@ -48,7 +48,7 @@ public class NewVersionAppActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_version_app);
-        Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
         markdownView = findViewById(R.id.markdown_view);
         buttonTg = findViewById(R.id.btnTg);
         buttonYa = findViewById(R.id.btnYa);

@@ -41,7 +41,7 @@ public class ManagerWorkActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_work);
-        Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
         radioGroup = findViewById(R.id.radioGroupLvlBuyProduct);
         checkBoxLoad = findViewById(R.id.checkBoxLoad);
         checkBoxDelivery = findViewById(R.id.checkBoxDelivery);

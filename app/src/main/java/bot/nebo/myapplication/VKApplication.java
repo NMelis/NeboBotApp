@@ -33,7 +33,7 @@ public class VKApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
         VKSdk.initialize(this);
         LitePal.initialize(this);
         String[] fingerprints = VKUtil.getCertificateFingerprint(this, this.getPackageName());

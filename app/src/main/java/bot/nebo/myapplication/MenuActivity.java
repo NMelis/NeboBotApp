@@ -24,7 +24,7 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
         Fabric.with(this, new Crashlytics());
         markdownviewNew = (MarkdownView) findViewById(R.id.markdownviewNew);
         new LoadLastNew().execute();

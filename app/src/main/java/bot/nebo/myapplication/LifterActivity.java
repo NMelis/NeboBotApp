@@ -40,7 +40,7 @@ public class LifterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lifter);
-        Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
         btnPayAllDollars = findViewById(R.id.btnPayAllGold);
         btnCallVisitors = findViewById(R.id.btnCallVisitors);
         btnRunLiftOnGold = findViewById(R.id.btnRunLiftOnGold);

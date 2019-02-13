@@ -31,7 +31,7 @@ public class ListAccountActivity extends AppCompatActivity implements AdapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_account);
-        Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
 
         deleteSelectedAccount = findViewById(R.id.btnDeleteAccount);
         dropdown = findViewById(R.id.dropdownAccounts);
