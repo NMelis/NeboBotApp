@@ -47,6 +47,11 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onInviter(View view) {
+        Intent intent = new Intent(this, InviterActivity.class);
+        startActivity(intent);
+    }
+
     class LoadLastNew extends AsyncTask {
 
         @Override

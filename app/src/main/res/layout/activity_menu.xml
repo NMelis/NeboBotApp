@@ -55,12 +55,12 @@
             tools:layout_editor_absoluteY="140dp" />
 
         <Button
-            android:id="@+id/btnQuests"
+            android:id="@+id/btnInviter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/quests"
-            android:enabled="false"
-            android:text="Личные задании"
+            android:onClick="onInviter"
+            android:text="Приглашалка"
             android:textSize="12sp"
             tools:layout_editor_absoluteX="108dp"
             tools:layout_editor_absoluteY="199dp" />

@@ -50,7 +50,9 @@
             android:name="io.fabric.ApiKey"
             android:value="9378a9ddd1090efd732e349106bb36da33ec38bb" />
 
-        <activity android:name=".LifterActivity"></activity>
+        <activity android:name=".LifterActivity" />
+        <activity android:name=".InviterActivity"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
