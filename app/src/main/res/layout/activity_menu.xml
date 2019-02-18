@@ -6,77 +6,170 @@
     android:layout_height="match_parent"
     tools:context=".MenuActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="203dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="148dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+            <Button
+                android:id="@+id/btnManager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/office"
+                android:onClick="btnManager"
+                android:text=" Менеджер"
+                tools:layout_editor_absoluteX="158dp"
+                tools:layout_editor_absoluteY="101dp" />
+
+            <Button
+                android:id="@+id/btnLifter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/tb_lift"
+                android:onClick="startBtnLifter"
+                android:text="Лифтер"
+                tools:layout_editor_absoluteX="132dp"
+                tools:layout_editor_absoluteY="140dp" />
+
+            <Button
+                android:id="@+id/btnInviter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/quests"
+                android:onClick="onInviter"
+                android:text="Приглашалка"
+                android:textSize="12sp"
+                tools:layout_editor_absoluteX="108dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <Button
+                android:id="@+id/btnHumanCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:onClick="onInviter"
+                android:text="Горожане города"
+                android:textSize="12sp"
+                tools:layout_editor_absoluteX="108dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="148dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+            <Button
+                android:id="@+id/btnQuestionsCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onInviter"
+                android:text="Задании города"
+                android:enabled="false"
+                android:textSize="12sp"
+                tools:layout_editor_absoluteX="108dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <Button
+                android:id="@+id/btnOurQuestions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="btnManager"
+                android:text="Лч. Задании"
+                android:enabled="false"
+                tools:layout_editor_absoluteX="158dp"
+                tools:layout_editor_absoluteY="101dp" />
+
+            <Button
+                android:id="@+id/btnHotel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="startBtnLifter"
+                android:enabled="false"
+                android:text="Гостиница"
+                tools:layout_editor_absoluteX="132dp"
+                tools:layout_editor_absoluteY="140dp" />
+
+            <Button
+                android:id="@+id/btnMagazine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onInviter"
+                android:text="Магазин"
+                android:enabled="false"
+                android:textSize="12sp"
+                tools:layout_editor_absoluteX="108dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="Действие:"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="224dp"
-        android:layout_height="156dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/btnManager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/office"
-            android:onClick="btnManager"
-            android:text=" Менеджер"
-            tools:layout_editor_absoluteX="158dp"
-            tools:layout_editor_absoluteY="101dp" />
-
-        <Button
-            android:id="@+id/btnLifter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/tb_lift"
-            android:onClick="startBtnLifter"
-            android:text="Лифтер"
-            tools:layout_editor_absoluteX="132dp"
-            tools:layout_editor_absoluteY="140dp" />
-
-        <Button
-            android:id="@+id/btnInviter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/quests"
-            android:onClick="onInviter"
-            android:text="Приглашалка"
-            android:textSize="12sp"
-            tools:layout_editor_absoluteX="108dp"
-            tools:layout_editor_absoluteY="199dp" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <br.tiagohm.markdownview.MarkdownView
         android:id="@+id/markdownviewNew"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="166dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="16dp"
         android:padding="@dimen/activity_horizontal_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_horizontal_margin"
@@ -84,36 +177,33 @@
         android:paddingBottom="@dimen/activity_horizontal_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAllNews" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="23dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="8dp"
-        android:text="Последняя новость:"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Информация"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintBottom_toTopOf="@+id/markdownviewNew"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnAllNews"
         android:layout_width="wrap_content"
         android:layout_height="30sp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:onClick="btnAllNews"
         android:text="Все новости"
         android:textSize="8sp"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintEnd_toEndOf="@+id/markdownviewNew"
+        app:layout_constraintTop_toTopOf="@+id/markdownviewNew" />
 
 
 </android.support.constraint.ConstraintLayout>
