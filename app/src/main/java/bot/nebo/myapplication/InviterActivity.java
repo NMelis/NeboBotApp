@@ -12,6 +12,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
+
+import bot.nebo.myapplication.helper.Helper;
+import io.fabric.sdk.android.Fabric;
 import ru.nebolife.bot.core.core.works.City;
 import ru.nebolife.bot.core.helpers.StopBotException;
 import ru.nebolife.bot.core.listeners.GetOntInfoListener;
@@ -40,6 +46,7 @@ public class InviterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inviter);
+        if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
         editTextMinDays = findViewById(R.id.editTextMinDays);
         editTextMaxDays = findViewById(R.id.editTextMaxDays);
         editTextMinLvl = findViewById(R.id.editTextMinLvl);
@@ -47,6 +54,8 @@ public class InviterActivity extends AppCompatActivity {
         inviterLogLayout = findViewById(R.id.inviterLogLayout);
         inviterScrollViewLogs = findViewById(R.id.inviterScrollViewLogs);
         btnStartInvite = findViewById(R.id.btnStartInvite);
+
+        Answers.getInstance().logCustom(new CustomEvent("Open page invite"));
     }
 
     private void reloadEditTexts(){
@@ -92,6 +101,8 @@ public class InviterActivity extends AppCompatActivity {
         city = AddAccountActivity.botClient.City();
         AddAccountActivity.botClient.unStop();
 
+        Helper.logWithParametrs("Start invite", "city", AddAccountActivity.botClient.profile.city.name,
+                "cityLvl", String.valueOf(AddAccountActivity.botClient.profile.city.lvl));
         btnStartInvite.setEnabled(false);
         btnStartInvite.setText("Ждем");
         isFinishWork = true;
