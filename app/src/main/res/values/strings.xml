@@ -41,4 +41,5 @@
     <string name="textTGChannel">Канал в телеграме</string>
     <string name="authWithVk">Войти с помощью vk.com</string>
     <string name="textNew">Новости</string>
+    <string name="textUpdateButton">Обновление</string>
 </resources>

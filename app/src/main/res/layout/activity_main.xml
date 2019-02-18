@@ -82,6 +82,14 @@
             android:onClick="onNews"
             android:text="@string/textNew"
             android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/button34"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onUpdates"
+            android:text="@string/textUpdateButton"
+            android:textAllCaps="false" />
     </LinearLayout>
 
     <TextView
