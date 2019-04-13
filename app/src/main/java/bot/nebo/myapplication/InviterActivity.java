@@ -1,9 +1,8 @@
 package bot.nebo.myapplication;
 
-import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,8 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
 
 import bot.nebo.myapplication.helper.Helper;
 import io.fabric.sdk.android.Fabric;
@@ -55,7 +52,7 @@ public class InviterActivity extends AppCompatActivity {
         inviterScrollViewLogs = findViewById(R.id.inviterScrollViewLogs);
         btnStartInvite = findViewById(R.id.btnStartInvite);
 
-        Answers.getInstance().logCustom(new CustomEvent("Open page invite"));
+        Helper.log("Open page invite");
     }
 
     private void reloadEditTexts(){

@@ -105,9 +105,9 @@
                 android:id="@+id/btnQuestionsCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:onClick="onInviter"
                 android:text="Задании города"
-                android:enabled="false"
                 android:textSize="12sp"
                 tools:layout_editor_absoluteX="108dp"
                 tools:layout_editor_absoluteY="199dp" />
@@ -116,9 +116,8 @@
                 android:id="@+id/btnOurQuestions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="btnManager"
+                android:onClick="btnMyQuestions"
                 android:text="Лч. Задании"
-                android:enabled="false"
                 tools:layout_editor_absoluteX="158dp"
                 tools:layout_editor_absoluteY="101dp" />
 
@@ -200,7 +199,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30sp"
         android:onClick="btnAllNews"
-        android:text="Все новости"
+        android:text="Новости"
         android:textSize="8sp"
         app:layout_constraintEnd_toEndOf="@+id/markdownviewNew"
         app:layout_constraintTop_toTopOf="@+id/markdownviewNew" />

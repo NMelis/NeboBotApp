@@ -13,8 +13,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKScope;
 import com.vk.sdk.VKSdk;
@@ -28,6 +26,7 @@ import org.litepal.LitePal;
 
 import java.util.HashMap;
 
+import bot.nebo.myapplication.helper.Helper;
 import bot.nebo.myapplication.models.User;
 import io.fabric.sdk.android.Fabric;
 import ru.nebolife.bot.core.core.RequestCore;
@@ -46,7 +45,7 @@ public class AuthActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
-        Answers.getInstance().logCustom(new CustomEvent("Login to app"));
+        Helper.log("Login to app");
         setContentView(R.layout.activity_auth);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

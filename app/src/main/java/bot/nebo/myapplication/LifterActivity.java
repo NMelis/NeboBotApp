@@ -12,15 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
 
+import bot.nebo.myapplication.helper.Helper;
 import io.fabric.sdk.android.Fabric;
-import ru.nebolife.bot.core.core.RequestCore;
 import ru.nebolife.bot.core.core.works.Lift;
 import ru.nebolife.bot.core.helpers.StopBotException;
 import ru.nebolife.bot.core.listeners.GetOntInfoListener;
-import ru.nebolife.bot.core.listeners.LiftGetAllDollarsListener;
 import ru.nebolife.bot.core.listeners.LiftListener;
 
 public class LifterActivity extends AppCompatActivity {
@@ -58,7 +55,7 @@ public class LifterActivity extends AppCompatActivity {
 
     public void startLifter(View view) {
         AddAccountActivity.botClient.unStop();
-        Answers.getInstance().logCustom(new CustomEvent("Start lifter"));
+        Helper.log("Start lifter");
         runWork(false);
         isFinishWork = true;
         new Thread(new Runnable() {

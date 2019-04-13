@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
 
 import bot.nebo.myapplication.helper.Helper;
 import io.fabric.sdk.android.Fabric;
@@ -33,7 +31,7 @@ public class BanedActivity extends AppCompatActivity {
     public void onBackPressed() {
         clickCountBack++;
         if (clickCountBack >= 5){
-            Answers.getInstance().logCustom(new CustomEvent("Use hack to on back with baned page"));
+            Helper.log("Use hack to on back with baned page");
             AuthActivity.user.setBaned(false);
             AuthActivity.user.save();
             Intent intent = new Intent(getBaseContext(), AuthActivity.class);

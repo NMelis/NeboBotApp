@@ -19,6 +19,7 @@ import org.litepal.LitePal;
 
 import java.util.HashMap;
 
+import bot.nebo.myapplication.helper.Helper;
 import bot.nebo.myapplication.models.User;
 import bot.nebo.myapplication.models.UserAccount;
 import io.fabric.sdk.android.Fabric;
@@ -28,7 +29,7 @@ import ru.nebolife.bot.core.listeners.NewVersionAppInterface;
 
 public class MainActivity extends Activity {
     // TODO To need change version & isDev every build apk
-    public static final float VERSION_APP = (float) 0.9;
+    public static final float VERSION_APP = (float) 1.0;
     public static final boolean isDev = false;
     static User user;
     Button btnLoadAccounts;
@@ -44,6 +45,7 @@ public class MainActivity extends Activity {
         textViewVersionApp.setText("Версия приложение: "+ VERSION_APP);
         UserAccount userAccount = LitePal.findFirst(UserAccount.class);
         if (userAccount == null) btnLoadAccounts.setEnabled(false);
+        Helper.log("Main");
 
 
         user = LitePal.findFirst(User.class);
