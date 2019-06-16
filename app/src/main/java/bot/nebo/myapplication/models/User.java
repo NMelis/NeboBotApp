@@ -10,6 +10,7 @@ public class User extends LitePalSupport {
     private Boolean isBaned;
     private Boolean isTester;
     private String vkId;
+    private boolean isAcceptLicense;
 
     public Boolean getBaned() {
         return isBaned;
@@ -60,6 +61,9 @@ public class User extends LitePalSupport {
         this.vkEmail = vkEmail;
     }
 
+    public boolean isAcceptLicense() { return isAcceptLicense; }
+
+    public void setAcceptLicense(boolean acceptLicense) { isAcceptLicense = acceptLicense; }
 
     @Column(unique = true, defaultValue = "None")
     private String vkEmail;

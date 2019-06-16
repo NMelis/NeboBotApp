@@ -26,7 +26,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".MoneySponsorListActivity"></activity>
+        <activity android:name=".LicenseActivity"></activity>
+        <activity android:name=".MoneySponsorListActivity" />
         <activity
             android:name=".HelpMoneyActivity"
             android:label="@string/title_activity_help_money"

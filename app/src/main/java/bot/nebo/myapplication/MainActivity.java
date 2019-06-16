@@ -56,6 +56,11 @@ public class MainActivity extends Activity {
         Bundle extra = getIntent().getExtras();
         if (extra == null) checkNewVersionApp();
 
+        if (!user.isAcceptLicense()){
+            Intent intent = new Intent(getBaseContext(), LicenseActivity.class);
+            startActivity(intent);
+        }
+
 
     }
 
