@@ -42,4 +42,6 @@
     <string name="authWithVk">Войти с помощью vk.com</string>
     <string name="textNew">Новости</string>
     <string name="textUpdateButton">Обновление</string>
+    <string name="helpMoney">Помочь проекту</string>
+    <string name="title_activity_help_money">HelpMoneyActivity</string>
 </resources>

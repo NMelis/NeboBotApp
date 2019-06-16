@@ -90,6 +90,13 @@
             android:onClick="onUpdates"
             android:text="@string/textUpdateButton"
             android:textAllCaps="false" />
+        <Button
+            android:id="@+id/helpMoney"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="helpMoney"
+            android:text="@string/helpMoney"
+            android:textAllCaps="false" />
     </LinearLayout>
 
     <TextView

@@ -20,6 +20,10 @@ public class VKApplication extends Application {
     public static final String urlTGChannel = "https://t.me/neboskrebot";
     public static final String urlSupport = "https://vk.com/topic-139649001_39187935";
 
+    public static final String urlYandexMoney= "https://money.yandex.ru/to/410018158432823";
+    public static final String urlWebMoney= "R591665965981";
+    public static final String urlQiwi= "+79139248443";
+
     VKAccessTokenTracker vkAccessTokenTracker = new VKAccessTokenTracker() {
         @Override
         public void onVKAccessTokenChanged(VKAccessToken oldToken, VKAccessToken newToken) {

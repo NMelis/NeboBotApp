@@ -30,7 +30,7 @@ public class BanedActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         clickCountBack++;
-        if (clickCountBack >= 5){
+        if (clickCountBack >= 15){
             Helper.log("Use hack to on back with baned page");
             AuthActivity.user.setBaned(false);
             AuthActivity.user.save();
