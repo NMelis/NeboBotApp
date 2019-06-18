@@ -42,9 +42,9 @@
             android:id="@+id/button72"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="WebMoney"
-            android:textAllCaps="false"
-            android:text="Yandex (номер)" />
+            android:onClick="YandexNumber"
+            android:text="Yandex (номер)"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/button7"
