@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bot.nebo.myapplication.models.UserAccount;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
 
 public class ListAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -52,7 +54,7 @@ public class ListAccountActivity extends AppCompatActivity implements AdapterVie
     public void inputSelectAccount (View v){
         Log.i("sd", login.toString());
         if (login == null){
-            Toast.makeText(ListAccountActivity.this, "Вы не выбрали аккаунт", Toast.LENGTH_SHORT).show();
+            Crouton.makeText(ListAccountActivity.this, "Вы не выбрали аккаунт", Style.ALERT).show();
             return;
         }
         Intent intent = new Intent(ListAccountActivity.this, AddAccountActivity.class);
@@ -62,12 +64,12 @@ public class ListAccountActivity extends AppCompatActivity implements AdapterVie
 
     public void deleteSelectedAccount(View v){
         if (login == null){
-            Toast.makeText(ListAccountActivity.this, "Вы не выбрали аккаунт", Toast.LENGTH_SHORT).show();
+            Crouton.makeText(ListAccountActivity.this, "Вы не выбрали аккаунт", Style.ALERT).show();
             return;
         }
         UserAccount account = LitePal.where("nikName = ?", login).find(UserAccount.class).get(0);
         account.delete();
-        Toast.makeText(this, "Аккаунт с логином \""+login+"\" удален с списка", Toast.LENGTH_SHORT).show();
+        Crouton.makeText(this, "Аккаунт с логином \""+login+"\" удален с списка",Style.CONFIRM).show();
         loadAccountToSpinner();
     }
 

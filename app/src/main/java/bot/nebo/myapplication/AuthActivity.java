@@ -1,5 +1,6 @@
 package bot.nebo.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -28,6 +29,8 @@ import java.util.HashMap;
 
 import bot.nebo.myapplication.helper.Helper;
 import bot.nebo.myapplication.models.User;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
 import ru.nebolife.bot.core.core.RequestCore;
 import ru.nebolife.bot.core.helpers.StopBotException;
@@ -55,7 +58,7 @@ public class AuthActivity extends AppCompatActivity {
         checkNewVersionApp();
 
         if (this.checkInternet()){
-            Toast.makeText(this, "Нету доступ к интернету", Toast.LENGTH_LONG).show();
+            Crouton.makeText(this, "Нету доступ к интернету", Style.INFO).show();
             return;
         }
         if (user != null){
@@ -66,20 +69,22 @@ public class AuthActivity extends AppCompatActivity {
 
     public void onAuth(View view){
         if (this.checkInternet()){
-            Toast.makeText(this, "Нету доступ к интернету", Toast.LENGTH_LONG).show();
+            Crouton.makeText(this, "Нету доступ к интернету", Style.INFO).show();
             return;
         }
         final VKAccessToken token = VKAccessToken.currentToken();
+        final Activity activity = (Activity) this;
         if (token == null || token.isExpired()) { VKSdk.login(this, scope);}
         if (AuthActivity.user == null) {
             if (VKSdk.isLoggedIn()) {
                 authVkBtn.setEnabled(false);
-                Toast.makeText(this, "Секундочку...", Toast.LENGTH_SHORT).show();
+                Crouton.makeText(this, "Секундочку", Style.INFO).show();
+
                 VKApi.users().get().executeWithListener(new VKRequest.VKRequestListener() {
                     @Override
                     public void onComplete(VKResponse response) {
                         VKApiUser user = (VKApiUser) ((VKList) response.parsedModel).get(0);
-                        Toast.makeText(getBaseContext(), user.first_name, Toast.LENGTH_LONG).show();
+                        Crouton.makeText(activity, "Привет, " + user.first_name + "!", Style.INFO).show();
                         if (AuthActivity.user == null) {
                             AuthActivity.user = new User();
                             if (token.email != null) {
@@ -98,7 +103,7 @@ public class AuthActivity extends AppCompatActivity {
 
         }
         else {
-            Toast.makeText(this, user.getVkFirstName(), Toast.LENGTH_LONG).show();
+            Crouton.makeText(this, "Привет, " + user.getVkFirstName() + "!", Style.INFO).show();
             start(user.getVkId());
         }
     }

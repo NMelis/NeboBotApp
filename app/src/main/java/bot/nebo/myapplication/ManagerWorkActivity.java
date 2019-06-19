@@ -1,5 +1,6 @@
 package bot.nebo.myapplication;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 
 import bot.nebo.myapplication.helper.Helper;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
 import ru.nebolife.bot.core.helpers.StopBotException;
 import ru.nebolife.bot.core.listeners.CollectRevenueListener;
@@ -122,6 +125,7 @@ public class ManagerWorkActivity extends AppCompatActivity {
     }
 
     private void addLog(final String text){
+        final Activity activity = (Activity) this;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -134,6 +138,7 @@ public class ManagerWorkActivity extends AppCompatActivity {
                     btnManagerStart.setEnabled(true);
                     btnManagerStart.setText("Начать");
                     addLog("Менеджер закончил работу");
+                    Crouton.makeText(activity, "Менеджер закончил работу", Style.CONFIRM).show();
                     cP = false;
                     dP = false;
                     bP = false;
@@ -151,11 +156,11 @@ public class ManagerWorkActivity extends AppCompatActivity {
                 AddAccountActivity.botClient.stop();
                 cP = dP = bP = isRunManager = false;
                 addLog("");
-                Toast.makeText(this, "Бот был остановлен", Toast.LENGTH_LONG).show();
+                Crouton.makeText(this, "Бот остановлен", Style.INFO).show();
                 stopBot = false;
                 return;
             }
-            Toast.makeText(this, "Нажмите еще раз чтобы остановить бота", Toast.LENGTH_LONG).show();
+            Crouton.makeText(this, "Нажмите еще раз чтобы остановить бота", Style.INFO).show();
             stopBot = true;
         }
 

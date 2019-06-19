@@ -1,5 +1,9 @@
 package bot.nebo.myapplication;
 
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,6 +27,8 @@ import java.util.List;
 import bot.nebo.myapplication.helper.Helper;
 import bot.nebo.myapplication.models.User;
 import bot.nebo.myapplication.models.UserAccount;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
 import ru.nebolife.bot.core.core.RequestCore;
 import ru.nebolife.bot.core.core.sites.NeboMobi;
@@ -78,7 +84,6 @@ public class AddAccountActivity extends AppCompatActivity {
         if (extras != null){
             loadUserSelectedAccount(extras.getString("LOGIN"));
         }
-
     }
     public void login(View view) {
         if (editNickName.getText().toString().isEmpty()) {
@@ -168,7 +173,7 @@ public class AddAccountActivity extends AppCompatActivity {
                 System.out.println("Successful authorization");
                 Helper.logWithParametrs("Login", "success", userAccount.getNikName(), "site", userAccount.getSite());
             }else {
-                Toast.makeText(getBaseContext(), "Неправильный пароль или логин", Toast.LENGTH_SHORT).show();
+//                Crouton.makeText((Activity) context, "Неправильный пароль или логин", Style.ALERT).show();
                 Helper.logWithParametrs("Login", "failed", userAccount.getNikName(), "site", userAccount.getSite());
             }
             progressBarLogin.setVisibility(View.INVISIBLE);

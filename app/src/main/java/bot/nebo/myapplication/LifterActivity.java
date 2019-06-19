@@ -1,5 +1,6 @@
 package bot.nebo.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 
 import bot.nebo.myapplication.helper.Helper;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
 import ru.nebolife.bot.core.core.works.Lift;
 import ru.nebolife.bot.core.helpers.StopBotException;
@@ -93,6 +96,7 @@ public class LifterActivity extends AppCompatActivity {
     }
 
     private void addLog(final String text){
+        final Activity activity = (Activity) this;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -101,7 +105,7 @@ public class LifterActivity extends AppCompatActivity {
                 textView.setTextColor(Color.BLUE);
                 liftLogLayout.addView(textView, 0);
                 if (!isFinishWork) {
-                    Toast.makeText(getBaseContext(), "Лифтер закончил работу", Toast.LENGTH_SHORT).show();
+                    Crouton.makeText(activity, "Лифтер закончил работу", Style.INFO).show();
                     btnStartLiter.setEnabled(true);
                     btnStartLiter.setText("Начать");
                     isFinishWork = false;
@@ -136,12 +140,13 @@ public class LifterActivity extends AppCompatActivity {
             if (stopBot) {
                 AddAccountActivity.botClient.stop();
                 runWork(true);
-                Toast.makeText(this, "Бот был остановлен", Toast.LENGTH_LONG).show();
+                Crouton.makeText(this, "Бот был остановлен", Style.ALERT).show();
                 stopBot = false;
                 isFinishWork = false;
                 return;
             }
-            Toast.makeText(this, "Нажмите еще раз чтобы остановить бота", Toast.LENGTH_LONG).show();
+            Crouton.makeText(this, "Нажмите еще раз чтобы остановить бота", Style.INFO).show();
+
             stopBot = true;
         }
 

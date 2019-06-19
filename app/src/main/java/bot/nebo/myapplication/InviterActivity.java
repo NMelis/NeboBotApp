@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 
 import bot.nebo.myapplication.helper.Helper;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
 import ru.nebolife.bot.core.core.works.City;
 import ru.nebolife.bot.core.helpers.StopBotException;
@@ -146,14 +148,14 @@ public class InviterActivity extends AppCompatActivity {
         else {
             if (stopBot) {
                 AddAccountActivity.botClient.stop();
-                Toast.makeText(this, "Бот был остановлен", Toast.LENGTH_LONG).show();
+                Crouton.makeText(this, "Бот был остановлен", Style.ALERT).show();
                 stopBot = false;
                 isFinishWork = false;
                 btnStartInvite.setEnabled(true);
                 btnStartInvite.setText("Начать");
                 return;
             }
-            Toast.makeText(this, "Нажмите еще раз чтобы остановить бота", Toast.LENGTH_LONG).show();
+            Crouton.makeText(this, "Нажмите еще раз чтобы остановить бота", Style.INFO).show();
             stopBot = true;
         }
 

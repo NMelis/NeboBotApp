@@ -1,8 +1,11 @@
 package bot.nebo.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -16,9 +19,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import bot.nebo.myapplication.helper.Helper;
 import br.tiagohm.markdownview.MarkdownView;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
 import ru.nebolife.bot.core.core.RequestCore;
 import ru.nebolife.bot.core.helpers.StopBotException;
@@ -27,7 +33,7 @@ import ru.nebolife.bot.core.listeners.NewVersionAppInterface;
 public class NewVersionAppActivity extends AppCompatActivity {
     private int clickCountBack = 0;
     private boolean pressVolumeUp = false;
-    TextView updateTextWithVersion;
+    TextView textView10;
     TextView desc;
     Button buttonTg;
     Button buttonYa;
@@ -47,8 +53,10 @@ public class NewVersionAppActivity extends AppCompatActivity {
         markdownView = findViewById(R.id.markdown_view);
         buttonTg = findViewById(R.id.btnTg);
         buttonYa = findViewById(R.id.btnYa);
+        textView10 = findViewById(R.id.textView10);
         buttonMega = findViewById(R.id.btnMega);
         Helper.log("Open page New version app");
+        final Activity activity = (Activity) this;
         markdownView.loadMarkdownFromUrl("https://s3.eu-west-3.amazonaws.com/nebo-bot/textNew.md");
         try {
             new RequestCore("").getLastNewVersion(MainActivity.VERSION_APP, new NewVersionAppInterface() {
@@ -58,9 +66,15 @@ public class NewVersionAppActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             required = (boolean) hashMap.get("required");
+                            float versionInLast = (float) hashMap.get("versionInLast");
+                            System.out.println("MELISMELIS:" + versionInLast);
+                            System.out.println("MELISMELIS:" + MainActivity.VERSION_APP);
+                            if (versionInLast <= MainActivity.VERSION_APP){
+                                textView10.setText("Это обновление у вас уже установлено");
+                            }
                             if (!required) {
-                                Toast.makeText(getApplicationContext(), "Это обновление необезательное, можете не устанавливать его сейчас", Toast.LENGTH_LONG).show();
-                                Toast.makeText(getApplicationContext(), "Нажмите назад (стрелочку) чтобы продолжить использование приложение без обновление", Toast.LENGTH_LONG).show();
+                                Crouton.makeText(activity, "Это обновление необезательное, можете не устанавливать его сейчас", Style.INFO).show();
+                                Crouton.makeText(activity, "Нажмите назад (стрелочку) чтобы продолжить использование приложение без обновление", Style.INFO).show();
                             }
                             JSONObject links = (JSONObject) hashMap.get("links");
                             setTitle((String) hashMap.get("desc"));
@@ -83,6 +97,18 @@ public class NewVersionAppActivity extends AppCompatActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Bundle extras = getIntent().getExtras();
+
+
+        if (extras != null) {
+            String canBack = getIntent().getExtras().getString("canBack");
+            if (canBack != null){
+                super.onBackPressed();
+                return super.onKeyLongPress(keyCode, event);
+            }
+        }
+
+
         if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
             if (clickCountBack == 5) {
                 pressVolumeUp = true;
@@ -96,7 +122,7 @@ public class NewVersionAppActivity extends AppCompatActivity {
                 super.onBackPressed();
                 return super.onKeyLongPress(keyCode, event);
             }
-            Toast.makeText(this, "Это обновление обязательнен к установке", Toast.LENGTH_LONG).show();
+            Crouton.makeText(this, "Это обновление обязательнен к установке", Style.ALERT).show();
             return false;
 
         }

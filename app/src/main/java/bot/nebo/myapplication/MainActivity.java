@@ -22,6 +22,8 @@ import java.util.HashMap;
 import bot.nebo.myapplication.helper.Helper;
 import bot.nebo.myapplication.models.User;
 import bot.nebo.myapplication.models.UserAccount;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
 import ru.nebolife.bot.core.core.RequestCore;
 import ru.nebolife.bot.core.helpers.StopBotException;
@@ -50,7 +52,7 @@ public class MainActivity extends Activity {
 
         user = LitePal.findFirst(User.class);
         if (!this.checkInternet()){
-            Toast.makeText(this, "Нету доступ к интеренету", Toast.LENGTH_LONG).show();
+            Crouton.makeText(this, "Нету доступ к интеренету", Style.ALERT).show();
         }
 
         Bundle extra = getIntent().getExtras();
@@ -61,6 +63,7 @@ public class MainActivity extends Activity {
             startActivity(intent);
         }
 
+        Crouton.makeText(this, "Привет, " + user.getVkFirstName(), Style.CONFIRM).show();
 
     }
 
@@ -75,7 +78,7 @@ public class MainActivity extends Activity {
     public void loadAccount(View v){
         UserAccount userAccount = LitePal.findFirst(UserAccount.class);
         if (userAccount == null) {
-            Toast.makeText(this, "У вас нету сохраненных аккаунтов", Toast.LENGTH_SHORT).show();
+            Crouton.makeText(this, "У вас нету сохраненных аккаунтов", Style.ALERT).show();
         }
         Intent intent = new Intent(this, ListAccountActivity.class);
         startActivity(intent);
@@ -128,6 +131,7 @@ public class MainActivity extends Activity {
 
     public void onUpdates(View view) {
         Intent intent = new Intent(getBaseContext(), NewVersionAppActivity.class);
+        intent.putExtra("canBack", "yes");
         startActivity(intent);
     }
 

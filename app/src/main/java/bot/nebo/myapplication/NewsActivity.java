@@ -1,5 +1,6 @@
 package bot.nebo.myapplication;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +41,7 @@ public class NewsActivity extends AppCompatActivity {
 
     class LoadLastNews extends AsyncTask {
 
+        @SuppressLint("WrongThread")
         @Override
         protected Object doInBackground(Object[] objects) {
             URLConnection connection = null;
