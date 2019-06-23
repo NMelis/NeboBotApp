@@ -11,6 +11,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -40,19 +41,19 @@ import ru.nebolife.bot.core.listeners.NewVersionAppInterface;
 
 public class AuthActivity extends AppCompatActivity {
     static User user;
-    String[] scope = new String[]{VKScope.EMAIL};
-    Button authVkBtn;
+    EditText myName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
-        Helper.log("Login to app");
         setContentView(R.layout.activity_auth);
+        myName = findViewById(R.id.myName);
+
+        Helper.log("Login to app");
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        authVkBtn = (Button) findViewById(R.id.authVkBtn);
         AuthActivity.user = LitePal.findFirst(User.class);
         System.out.println("user" + user);
         checkNewVersionApp();
@@ -72,40 +73,22 @@ public class AuthActivity extends AppCompatActivity {
             Crouton.makeText(this, "Нету доступ к интернету", Style.INFO).show();
             return;
         }
-        final VKAccessToken token = VKAccessToken.currentToken();
-        final Activity activity = (Activity) this;
-        if (token == null || token.isExpired()) { VKSdk.login(this, scope);}
+
+        if (myName.getText().toString().equals("")){
+            Crouton.makeText(this, "Введите хотябы кличку собаки вашего соседа из университете", Style.ALERT).show();
+            return;
+        }
         if (AuthActivity.user == null) {
-            if (VKSdk.isLoggedIn()) {
-                authVkBtn.setEnabled(false);
-                Crouton.makeText(this, "Секундочку", Style.INFO).show();
-
-                VKApi.users().get().executeWithListener(new VKRequest.VKRequestListener() {
-                    @Override
-                    public void onComplete(VKResponse response) {
-                        VKApiUser user = (VKApiUser) ((VKList) response.parsedModel).get(0);
-                        Crouton.makeText(activity, "Привет, " + user.first_name + "!", Style.INFO).show();
-                        if (AuthActivity.user == null) {
-                            AuthActivity.user = new User();
-                            if (token.email != null) {
-                                AuthActivity.user.setVkEmail(token.email);
-                            }
-                            AuthActivity.user.setVkId(String.valueOf(user.getId()));
-                            AuthActivity.user.setVkFirstName(user.first_name);
-                            AuthActivity.user.setVkLastName(user.last_name);
-                            AuthActivity.user.save();
-                        }
-                        start(String.valueOf(user.getId()));
-
-                    }
-                });
-            }
-
+            AuthActivity.user = new User();
+            AuthActivity.user.setVkId("123123123123");
+            AuthActivity.user.setVkFirstName(myName.getText().toString());
+            AuthActivity.user.setVkLastName("41241");
+            AuthActivity.user.save();
         }
-        else {
-            Crouton.makeText(this, "Привет, " + user.getVkFirstName() + "!", Style.INFO).show();
-            start(user.getVkId());
-        }
+        Crouton.makeText(this, "Привет, " + user.getVkFirstName() + "!", Style.INFO).show();
+
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(intent);
     }
 
     private boolean checkInternet(){

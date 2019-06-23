@@ -24,21 +24,10 @@ public class VKApplication extends Application {
     public static final String urlWebMoney= "R591665965981";
     public static final String urlQiwi= "+79139248443";
 
-    VKAccessTokenTracker vkAccessTokenTracker = new VKAccessTokenTracker() {
-        @Override
-        public void onVKAccessTokenChanged(VKAccessToken oldToken, VKAccessToken newToken) {
-            if (newToken == null) {
-                Intent intent = new Intent(VKApplication.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        }
-    };
     @Override
     public void onCreate() {
         super.onCreate();
         if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
-        VKSdk.initialize(this);
         LitePal.initialize(this);
         String[] fingerprints = VKUtil.getCertificateFingerprint(this, this.getPackageName());
         Helper.log("Open app");

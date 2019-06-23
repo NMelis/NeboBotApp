@@ -21,6 +21,7 @@ public class Helper {
         AddAccountActivity.user = LitePal.findFirst(User.class);
         String userName = "NoName";
         if (AddAccountActivity.user != null) userName = AddAccountActivity.user.getVkFirstName();
+        if (userName == null) {userName = "Хрень";}
         return userName;
     }
 
