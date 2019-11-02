@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -12,14 +13,21 @@ import io.fabric.sdk.android.Fabric;
 
 public class MenuActivity extends AppCompatActivity {
     MarkdownView markdownviewNew;
+    TextView coin;
+    TextView gold;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
+
+        gold = findViewById(R.id.gold);
+        coin = findViewById(R.id.coin);
         markdownviewNew = (MarkdownView) findViewById(R.id.markdownviewNew);
         markdownviewNew.loadMarkdownFromUrl(VKApplication.urlStorageMds + "lastNew.md");
+        coin.setText(AddAccountActivity.botClient.profile.coin);
+        gold.setText(AddAccountActivity.botClient.profile.gold);
 
     }
 
