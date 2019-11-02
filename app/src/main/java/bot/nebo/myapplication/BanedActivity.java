@@ -11,7 +11,7 @@ import com.crashlytics.android.Crashlytics;
 import bot.nebo.myapplication.helper.Helper;
 import io.fabric.sdk.android.Fabric;
 
-public class BanedActivity extends AppCompatActivity {
+public class    BanedActivity extends AppCompatActivity {
     private int clickCountBack = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

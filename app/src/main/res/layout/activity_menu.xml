@@ -125,8 +125,7 @@
                 android:id="@+id/btnHotel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="startBtnLifter"
-                android:enabled="false"
+                android:onClick="startBtnHotel"
                 android:text="Гостиница"
                 tools:layout_editor_absoluteX="132dp"
                 tools:layout_editor_absoluteY="140dp" />

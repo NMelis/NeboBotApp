@@ -1,12 +1,8 @@
 package bot.nebo.myapplication;
 
 import android.app.Application;
-import android.content.Intent;
 
 import com.crashlytics.android.Crashlytics;
-import com.vk.sdk.VKAccessToken;
-import com.vk.sdk.VKAccessTokenTracker;
-import com.vk.sdk.VKSdk;
 import com.vk.sdk.util.VKUtil;
 
 import org.litepal.LitePal;

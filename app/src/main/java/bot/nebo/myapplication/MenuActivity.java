@@ -31,9 +31,6 @@ public class MenuActivity extends AppCompatActivity {
         markdownviewNew = (MarkdownView) findViewById(R.id.markdownviewNew);
         markdownviewNew.loadMarkdownFromUrl(VKApplication.urlStorageMds + "lastNew.md");
 
-        OneTimeWorkRequest myWorkRequest = new OneTimeWorkRequest.Builder(MyWorker.class).setInitialDelay(1, TimeUnit.SECONDS).build();
-        WorkManager.getInstance().enqueue(myWorkRequest);
-
     }
 
     public void btnAllNews(View view){
@@ -62,45 +59,9 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public static class MyWorker extends Worker {
-
-        static final String TAG = "workmng";
-
-        @NonNull
-        @Override
-        public WorkerResult doWork() {
-            Log.d(TAG, "doWork: start");
-            final int[] countUp = {0};
-            try {
-                AddAccountActivity.botClient.lift(new LiftListener() {
-                    @Override
-                    public void onUp() {
-                        Log.d(TAG,"doWork: Поднимаем чела");
-                    }
-
-                    @Override
-                    public void onTip(String s, String s1) {
-                        String typeAward;
-                        if (s.equals("gold")) typeAward = "One Доллар";
-                        else typeAward = "Монеты";
-                        Log.d(TAG,"doWork: Чел дал на чаевые " + s1 + " " + typeAward);
-                        countUp[0]++;
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        if (countUp[0] == 0) Log.d(TAG,"Лифт пустой");
-                        else Log.d(TAG,"doWork: Лифтер закончил работу, он поднял " + countUp[0] + " челов");
-                        countUp[0] = 0;
-                    }
-                });
-            } catch (StopBotException e) {
-                Log.d(TAG,"doWork: Бот был приостановлен");
-            }
-            Log.d(TAG, "doWork: end");
-
-            return WorkerResult.SUCCESS;
-        }
+    public void startBtnHotel(View view) {
+        Intent intent = new Intent(this, HotelActivity.class);
+        startActivity(intent);
     }
 
 }

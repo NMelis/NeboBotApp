@@ -3,15 +3,12 @@ package bot.nebo.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -19,7 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 import bot.nebo.myapplication.helper.Helper;
 import br.tiagohm.markdownview.MarkdownView;
@@ -57,7 +53,7 @@ public class NewVersionAppActivity extends AppCompatActivity {
         buttonMega = findViewById(R.id.btnMega);
         Helper.log("Open page New version app");
         final Activity activity = (Activity) this;
-        markdownView.loadMarkdownFromUrl("https://s3.eu-west-3.amazonaws.com/nebo-bot/textNew.md");
+        markdownView.loadMarkdownFromUrl("https://nebo-bot.s3.eu-west-3.amazonaws.com/textNew.md");
         try {
             new RequestCore("").getLastNewVersion(MainActivity.VERSION_APP, new NewVersionAppInterface() {
                 @Override
@@ -66,7 +62,7 @@ public class NewVersionAppActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             required = (boolean) hashMap.get("required");
-                            float versionInLast = (float) hashMap.get("versionInLast");
+                            float versionInLast = (float) hashMap.get("version");
                             System.out.println("MELISMELIS:" + versionInLast);
                             System.out.println("MELISMELIS:" + MainActivity.VERSION_APP);
                             if (versionInLast <= MainActivity.VERSION_APP){

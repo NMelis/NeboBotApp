@@ -26,6 +26,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
+        <activity android:name=".HotelEvictActivity"></activity>
+        <activity android:name=".HotelActivity" />
         <activity android:name=".LicenseActivity" />
         <activity android:name=".MoneySponsorListActivity" />
         <activity

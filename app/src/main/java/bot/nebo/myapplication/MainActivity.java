@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -31,8 +30,8 @@ import ru.nebolife.bot.core.listeners.NewVersionAppInterface;
 
 public class MainActivity extends Activity {
     // TODO To need change version & isDev every build apk
-    public static final float VERSION_APP = (float) 1.1;
-    public static final boolean isDev = true;
+    public static final float VERSION_APP = (float) 1.4;
+    public static final boolean isDev = false;
     static User user;
     Button btnLoadAccounts;
 
