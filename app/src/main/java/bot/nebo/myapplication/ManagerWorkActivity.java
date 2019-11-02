@@ -85,12 +85,12 @@ public class ManagerWorkActivity extends AppCompatActivity {
 
                         @Override
                         public void onRevenue(String floor) {
-                            addLog(floor);
+                            addLog("Закуплен товар на " + floor + " этаж");
                         }
                     }, new DeliveryListener() {
                         @Override
                         public void onDelivery(String floor) {
-                            addLog(floor);
+                            addLog("Товар доставлен на " + floor + " этаж");
                         }
 
                         @Override
