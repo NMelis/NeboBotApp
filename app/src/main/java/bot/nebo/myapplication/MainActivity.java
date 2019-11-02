@@ -2,10 +2,7 @@ package bot.nebo.myapplication;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +21,6 @@ import bot.nebo.myapplication.models.UserAccount;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
-import ru.nebolife.bot.core.core.RequestCore;
 import ru.nebolife.bot.core.helpers.StopBotException;
 import ru.nebolife.bot.core.listeners.NewVersionAppInterface;
 
@@ -32,6 +28,7 @@ public class MainActivity extends Activity {
     // TODO To need change version & isDev every build apk
     public static final float VERSION_APP = (float) 1.4;
     public static final boolean isDev = false;
+    public static String BASE_CDN_URL = "http://dfcfx0pfka9xy.cloudfront.net/";
     static User user;
     Button btnLoadAccounts;
 
@@ -50,9 +47,6 @@ public class MainActivity extends Activity {
 
 
         user = LitePal.findFirst(User.class);
-        if (!this.checkInternet()){
-            Crouton.makeText(this, "Нету доступ к интеренету", Style.ALERT).show();
-        }
 
         Bundle extra = getIntent().getExtras();
         if (extra == null) checkNewVersionApp();
@@ -65,15 +59,6 @@ public class MainActivity extends Activity {
         Crouton.makeText(this, "Привет, " + user.getVkFirstName(), Style.CONFIRM).show();
 
     }
-
-    private boolean checkInternet(){
-        ConnectivityManager cm =
-                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork.isConnectedOrConnecting();
-    }
-
     public void loadAccount(View v){
         UserAccount userAccount = LitePal.findFirst(UserAccount.class);
         if (userAccount == null) {
@@ -91,7 +76,7 @@ public class MainActivity extends Activity {
     }
     private void checkNewVersionApp(){
         try {
-            new RequestCore("").getLastNewVersion(VERSION_APP, new NewVersionAppInterface() {
+            Helper.RequestCore(true).getLastNewVersion(VERSION_APP, new NewVersionAppInterface() {
                 @Override
                 public void onResponse(HashMap<String, Object> hashMap) {
                     runOnUiThread(new Runnable() {

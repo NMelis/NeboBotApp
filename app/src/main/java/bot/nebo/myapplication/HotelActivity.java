@@ -1,17 +1,13 @@
 package bot.nebo.myapplication;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
 import ru.nebolife.bot.core.helpers.StopBotException;
-import ru.nebolife.bot.core.listeners.GetOntInfoListener;
 
 public class HotelActivity extends AppCompatActivity {
     TextView totalPlaceInHotel;

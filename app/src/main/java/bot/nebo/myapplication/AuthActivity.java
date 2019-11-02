@@ -90,7 +90,7 @@ public class AuthActivity extends AppCompatActivity {
 
     private void start(String value){
         try {
-            new RequestCore("").isUserVkBaned(value, new CheckInstance() {
+            Helper.RequestCore(false).isUserVkBaned(value, new CheckInstance() {
                 @Override
                 public void onResponse(boolean b) {
                     if (b){
@@ -107,7 +107,7 @@ public class AuthActivity extends AppCompatActivity {
     }
     private void checkNewVersionApp(){
         try {
-            new RequestCore("").getLastNewVersion(MainActivity.VERSION_APP, new NewVersionAppInterface() {
+            Helper.RequestCore(true).getLastNewVersion(MainActivity.VERSION_APP, new NewVersionAppInterface() {
                 @Override
                 public void onResponse(HashMap<String, Object> hashMap) {
                     runOnUiThread(new Runnable() {

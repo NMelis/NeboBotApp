@@ -30,7 +30,6 @@ public class ManagerWorkActivity extends AppCompatActivity {
     private CheckBox checkBoxDelivery;
     private CheckBox checkBoxBuy;
     private LinearLayout logLayout;
-    private ScrollView scrollViewLog;
     private boolean isRunManager = false;
     private boolean cP = false;
     private boolean dP = false;
@@ -48,7 +47,6 @@ public class ManagerWorkActivity extends AppCompatActivity {
         checkBoxBuy = findViewById(R.id.checkBoxBuy);
         btnManagerStart = findViewById(R.id.btnStartManager);
         logLayout = findViewById(R.id.logLayout);
-        scrollViewLog = findViewById(R.id.scrollViewLogs);
         AddAccountActivity.botClient.unStop();
     }
 

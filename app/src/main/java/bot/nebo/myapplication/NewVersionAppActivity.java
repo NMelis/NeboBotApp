@@ -53,9 +53,9 @@ public class NewVersionAppActivity extends AppCompatActivity {
         buttonMega = findViewById(R.id.btnMega);
         Helper.log("Open page New version app");
         final Activity activity = (Activity) this;
-        markdownView.loadMarkdownFromUrl("https://nebo-bot.s3.eu-west-3.amazonaws.com/textNew.md");
+        markdownView.loadMarkdownFromUrl(MainActivity.BASE_CDN_URL + MainActivity.VERSION_APP + "/textNew.md");
         try {
-            new RequestCore("").getLastNewVersion(MainActivity.VERSION_APP, new NewVersionAppInterface() {
+            Helper.RequestCore(true).getLastNewVersion(MainActivity.VERSION_APP, new NewVersionAppInterface() {
                 @Override
                 public void onResponse(final HashMap<String, Object> hashMap) {
                     runOnUiThread(new Runnable() {
@@ -63,9 +63,7 @@ public class NewVersionAppActivity extends AppCompatActivity {
                         public void run() {
                             required = (boolean) hashMap.get("required");
                             float versionInLast = (float) hashMap.get("version");
-                            System.out.println("MELISMELIS:" + versionInLast);
-                            System.out.println("MELISMELIS:" + MainActivity.VERSION_APP);
-                            if (versionInLast <= MainActivity.VERSION_APP){
+                            if (versionInLast == MainActivity.VERSION_APP){
                                 textView10.setText("Это обновление у вас уже установлено");
                             }
                             if (!required) {

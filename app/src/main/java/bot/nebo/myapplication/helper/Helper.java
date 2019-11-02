@@ -9,9 +9,9 @@ import org.litepal.LitePal;
 import bot.nebo.myapplication.AddAccountActivity;
 import bot.nebo.myapplication.MainActivity;
 import bot.nebo.myapplication.models.User;
+import ru.nebolife.bot.core.core.RequestCore;
 
 public class Helper {
-
     public static boolean checkRequestCore(Object requestCore){
         return requestCore == null;
     }
@@ -46,5 +46,12 @@ public class Helper {
                 .putCustomAttribute("UserName", userName)
                 .putCustomAttribute(key, value)
                 .putCustomAttribute(key2, value2));
+    }
+
+    public static RequestCore RequestCore(boolean withVersion){
+        if (withVersion)
+            return new RequestCore(MainActivity.BASE_CDN_URL + MainActivity.VERSION_APP);
+        else
+            return new RequestCore(MainActivity.BASE_CDN_URL);
     }
 }

@@ -2,23 +2,13 @@ package bot.nebo.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
-import androidx.work.Worker;
 
 import com.crashlytics.android.Crashlytics;
 
-import java.util.concurrent.TimeUnit;
-
 import br.tiagohm.markdownview.MarkdownView;
 import io.fabric.sdk.android.Fabric;
-import ru.nebolife.bot.core.helpers.StopBotException;
-import ru.nebolife.bot.core.listeners.LiftListener;
 
 public class MenuActivity extends AppCompatActivity {
     MarkdownView markdownviewNew;

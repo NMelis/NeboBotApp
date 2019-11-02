@@ -144,7 +144,7 @@ public class AddAccountActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean aBoolean) {
             if (this.isLogin) {
                 try {
-                    new RequestCore("").isUserBaned(login, new CheckInstance() {
+                    Helper.RequestCore(false).isUserBaned(login, new CheckInstance() {
                         @Override
                         public void onResponse(boolean b) {
                             if (b){
@@ -174,6 +174,7 @@ public class AddAccountActivity extends AppCompatActivity {
             super.onPostExecute(aBoolean);
         }
     }
+
     public void loadUserSelectedAccount(String userLogin){
         userAccount = LitePal.where("nikName = ?", userLogin).find(UserAccount.class).get(0);
         editNickName.setText(userAccount.getNikName());
