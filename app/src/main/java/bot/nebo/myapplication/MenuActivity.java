@@ -10,6 +10,8 @@ import com.crashlytics.android.Crashlytics;
 
 import br.tiagohm.markdownview.MarkdownView;
 import io.fabric.sdk.android.Fabric;
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
 
 public class MenuActivity extends AppCompatActivity {
     MarkdownView markdownviewNew;
@@ -21,6 +23,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Sentry.init("https://822abac97e054180a1229c9f2d589926@sentry.io/1810160", new AndroidSentryClientFactory(this));
 
         gold = findViewById(R.id.gold);
         coin = findViewById(R.id.coin);

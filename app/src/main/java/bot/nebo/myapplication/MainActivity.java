@@ -21,6 +21,9 @@ import bot.nebo.myapplication.models.UserAccount;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
+import io.sentry.event.BreadcrumbBuilder;
 import ru.nebolife.bot.core.helpers.StopBotException;
 import ru.nebolife.bot.core.listeners.NewVersionAppInterface;
 
@@ -38,6 +41,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Sentry.init("https://822abac97e054180a1229c9f2d589926@sentry.io/1810160", new AndroidSentryClientFactory(this));
         btnLoadAccounts = findViewById(R.id.btnLoadAccount);
         TextView textViewVersionApp = findViewById(R.id.textViewVersionApp);
         textViewVersionApp.setText("Версия приложение: "+ VERSION_APP);

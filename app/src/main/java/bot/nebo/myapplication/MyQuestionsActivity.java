@@ -17,6 +17,8 @@ import bot.nebo.myapplication.helper.Helper;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
 import ru.nebolife.bot.core.core.works.Lift;
 import ru.nebolife.bot.core.helpers.StopBotException;
 import ru.nebolife.bot.core.listeners.QuestsListener;
@@ -34,6 +36,7 @@ public class MyQuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_questions);
         if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Sentry.init("https://822abac97e054180a1229c9f2d589926@sentry.io/1810160", new AndroidSentryClientFactory(this));
         btnStartWorkMyQuestions = findViewById(R.id.btnStartWorkMyQuestions);
 
         liftLogLayout = findViewById(R.id.liftLogLayout);

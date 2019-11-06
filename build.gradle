@@ -8,7 +8,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
-        classpath 'com.amazonaws:aws-android-sdk-appsync-gradle-plugin:2.7.+'
+        classpath 'io.sentry:sentry-android-gradle-plugin:1.7.27'
 
     }
 }

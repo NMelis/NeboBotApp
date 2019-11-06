@@ -21,6 +21,8 @@ import bot.nebo.myapplication.models.UserAccount;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
 
 public class ListAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -33,6 +35,7 @@ public class ListAccountActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_account);
         if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Sentry.init("https://822abac97e054180a1229c9f2d589926@sentry.io/1810160", new AndroidSentryClientFactory(this));
 
         deleteSelectedAccount = findViewById(R.id.btnDeleteAccount);
         dropdown = findViewById(R.id.dropdownAccounts);

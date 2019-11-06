@@ -17,6 +17,8 @@ import bot.nebo.myapplication.helper.Helper;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import io.fabric.sdk.android.Fabric;
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
 import ru.nebolife.bot.core.core.works.Lift;
 import ru.nebolife.bot.core.helpers.StopBotException;
 import ru.nebolife.bot.core.listeners.GetOntInfoListener;
@@ -41,6 +43,7 @@ public class LifterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lifter);
         if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Sentry.init("https://822abac97e054180a1229c9f2d589926@sentry.io/1810160", new AndroidSentryClientFactory(this));
         btnPayAllDollars = findViewById(R.id.btnPayAllGold);
         btnCallVisitors = findViewById(R.id.btnCallVisitors);
         btnRunLiftOnGold = findViewById(R.id.btnRunLiftOnGold);

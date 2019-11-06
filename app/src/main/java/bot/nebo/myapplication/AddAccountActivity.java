@@ -23,6 +23,8 @@ import bot.nebo.myapplication.helper.Helper;
 import bot.nebo.myapplication.models.User;
 import bot.nebo.myapplication.models.UserAccount;
 import io.fabric.sdk.android.Fabric;
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
 import ru.nebolife.bot.core.core.RequestCore;
 import ru.nebolife.bot.core.core.sites.NeboMobi;
 import ru.nebolife.bot.core.core.sites.PumpitRu;
@@ -48,6 +50,7 @@ public class AddAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_account);
         if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Sentry.init("https://822abac97e054180a1229c9f2d589926@sentry.io/1810160", new AndroidSentryClientFactory(this));
         setTitle("Вход");
         user = LitePal.findFirst(User.class);
         dropdown = findViewById(R.id.listSite);

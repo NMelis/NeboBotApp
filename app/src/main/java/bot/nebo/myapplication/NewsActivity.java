@@ -21,6 +21,8 @@ import bot.nebo.myapplication.helper.Helper;
 import br.tiagohm.markdownview.MarkdownView;
 import br.tiagohm.markdownview.Utils;
 import io.fabric.sdk.android.Fabric;
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
 
 public class NewsActivity extends AppCompatActivity {
     ScrollView scrollViewNews;
@@ -32,6 +34,7 @@ public class NewsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
         if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Sentry.init("https://822abac97e054180a1229c9f2d589926@sentry.io/1810160", new AndroidSentryClientFactory(this));
         scrollViewNews = findViewById(R.id.scrollViewNews);
         linearLayout = findViewById(R.id.newsLayout);
         progressBarLoadNews = findViewById(R.id.progressBarLoadNews);

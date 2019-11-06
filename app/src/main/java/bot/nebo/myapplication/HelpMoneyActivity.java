@@ -9,6 +9,8 @@ import com.crashlytics.android.Crashlytics;
 
 import bot.nebo.myapplication.helper.Helper;
 import io.fabric.sdk.android.Fabric;
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
 
 public class HelpMoneyActivity extends AppCompatActivity {
 
@@ -17,6 +19,7 @@ public class HelpMoneyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_money);
         if (!MainActivity.isDev) Fabric.with(this, new Crashlytics());
+        if (!MainActivity.isDev) Sentry.init("https://822abac97e054180a1229c9f2d589926@sentry.io/1810160", new AndroidSentryClientFactory(this));
         Helper.log("Open Help Project ->");
 
     }
