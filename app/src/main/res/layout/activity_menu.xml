@@ -8,8 +8,9 @@
     tools:context=".MenuActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="203dp"
+        android:id="@+id/linearLayout8"
+        android:layout_width="322dp"
+        android:layout_height="154dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -70,17 +71,6 @@
                 tools:layout_editor_absoluteX="108dp"
                 tools:layout_editor_absoluteY="199dp" />
 
-            <Button
-                android:id="@+id/btnHumanCity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:onClick="onInviter"
-                android:text="Горожане города"
-                android:textSize="12sp"
-                tools:layout_editor_absoluteX="108dp"
-                tools:layout_editor_absoluteY="199dp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -122,17 +112,6 @@
                 android:text="Гостиница"
                 tools:layout_editor_absoluteX="132dp"
                 tools:layout_editor_absoluteY="140dp" />
-
-            <Button
-                android:id="@+id/btnMagazine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:onClick="onInviter"
-                android:text="Магазин"
-                android:textSize="12sp"
-                tools:layout_editor_absoluteX="108dp"
-                tools:layout_editor_absoluteY="199dp" />
 
         </LinearLayout>
     </LinearLayout>
@@ -246,6 +225,21 @@
         app:layout_constraintEnd_toStartOf="@+id/gold"
         app:layout_constraintTop_toTopOf="@+id/gold"
         app:srcCompat="@drawable/mn_gold" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="168dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/new_year_front"
+        android:drawable="@drawable/new_year_front"
+        android:onClick="newYeaActivity"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout8"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout8"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -7,7 +7,7 @@
     tools:context=".MyQuestionsActivity">
 
     <ScrollView
-        android:id="@+id/liftScrollViewLogs"
+        android:id="@+id/nyScrollViewLogs"
         android:layout_width="311dp"
         android:layout_height="383dp"
         android:layout_marginStart="8dp"

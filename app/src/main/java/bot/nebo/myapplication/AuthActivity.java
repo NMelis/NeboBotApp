@@ -56,7 +56,9 @@ public class AuthActivity extends AppCompatActivity {
         }
         if (user != null){
             if (user.getBaned()) {baned(); return;}
-            start(user.getVkId());
+
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -91,23 +93,6 @@ public class AuthActivity extends AppCompatActivity {
         return !activeNetwork.isConnectedOrConnecting();
     }
 
-    private void start(String value){
-        try {
-            Helper.RequestCore(false).isUserVkBaned(value, new CheckInstance() {
-                @Override
-                public void onResponse(boolean b) {
-                    if (b){
-                        baned();
-                    }else {
-                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                        startActivity(intent);
-                    }
-                }
-            });
-        } catch (StopBotException e) {
-            e.printStackTrace();
-        }
-    }
     private void checkNewVersionApp(){
         try {
             Helper.RequestCore(true).getLastNewVersion(MainActivity.VERSION_APP, new NewVersionAppInterface() {

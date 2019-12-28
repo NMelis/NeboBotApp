@@ -65,4 +65,8 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void newYeaActivity(View view) {
+        Intent intent = new Intent(this, NewYearStoreActivity.class);
+        startActivity(intent);
+    }
 }

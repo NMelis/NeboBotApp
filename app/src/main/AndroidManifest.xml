@@ -26,6 +26,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
+        <activity android:name=".NewYearStoreActivity"></activity>
         <activity android:name=".HotelEvictActivity" />
         <activity android:name=".HotelActivity" />
         <activity android:name=".LicenseActivity" />
